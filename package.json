@@ -1,0 +1,26 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fertp/backend-proyecto-ciclo-3.git"
+  },
+  "author": "Equipo 4",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fertp/backend-proyecto-ciclo-3/issues"
+  },
+  "homepage": "https://github.com/fertp/backend-proyecto-ciclo-3#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.9",
+    "nodemon": "^2.0.13"
+  }
+}
