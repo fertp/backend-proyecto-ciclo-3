@@ -9,6 +9,9 @@ let productModel = require("../models/product");
 // Index (Lista)
 router.get('/', productController.index)
 
+// Query (get)
+router.get('/search/:query', productController.search)
+
 // Create (post)
 router.post('/store', productController.store)
 

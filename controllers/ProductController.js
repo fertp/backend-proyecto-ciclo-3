@@ -1,3 +1,4 @@
+const { where } = require('../models/product');
 const model = require('../models/product');
 
 const index = async (req, res, next) => {
@@ -9,6 +10,19 @@ const index = async (req, res, next) => {
       message: 'Ha ocurrido un error.'
     })
     next(e)
+  }
+}
+
+const search = async (req, res, next) => {
+  try {
+    const reg = await model.find({ name: { $regex: req.params.query, $options: 'i' } })
+    // const reg = await model.find({ name: { $regex: `.*${req.params.query}.*` } })
+    res.status(200).json(reg)
+  } catch (e) {
+    console.log(e)
+    res.status(500).send({
+      message: 'Ha ocurrido un error.'
+    })
   }
 }
 
@@ -88,6 +102,7 @@ const destroy = async (req, res, next) => {
 
 module.exports = {
   index, 
+  search,
   store,
   show,
   showSlug,
