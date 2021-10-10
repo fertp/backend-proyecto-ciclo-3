@@ -43,6 +43,24 @@ const show = async (req, res, next) => {
   }
 }
 
+const showSlug = async (req, res, next) => {
+  try {
+    const reg = await model.findOne({ slug: req.params.slug })
+    if (!reg) {
+      res.status(404).send({
+        message: 'El producto no existe.'
+      })
+    } else {
+      res.status(200).json(reg)
+    }
+  } catch (e) {
+    res.status(500).send({
+      message: 'Ha ocurrido un error.'
+    })
+    next()
+  }
+}
+
 const update = async (req, res, next) => {
   try {
     await model.findByIdAndUpdate(req.params.id, { $set: req.body })
@@ -72,6 +90,7 @@ module.exports = {
   index, 
   store,
   show,
+  showSlug,
   update,
   destroy
 }

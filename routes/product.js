@@ -14,6 +14,9 @@ router.post('/store', productController.store)
 
 // Show (get)
 router.get("/show/:id", productController.show)
+
+// Show by slug (get)
+router.get("/show/slug/:slug", productController.showSlug)
  
 // Update (put)
 router.put('/update/:id', productController.update)

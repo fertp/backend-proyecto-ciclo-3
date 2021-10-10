@@ -2,11 +2,12 @@ const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema( 
   { 
-    title: { 
+    name: { 
       type: String, 
     }, 
     slug: {
       type: String,
+      unique: true
     },
     image: { 
       type: String, 
@@ -26,6 +27,12 @@ const productSchema = new mongoose.Schema(
     status: { 
       type: String,
     },
+    created_at: {
+      type: Timestamp,
+    },
+    last_modified: {
+      type: Timestamp,
+    }
   }, 
   { 
     collection: "products", 
