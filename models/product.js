@@ -22,7 +22,7 @@ const productSchema = new mongoose.Schema(
       type: String, 
     }, 
     category_id: { 
-      type: Number, 
+      type: String, 
     }, 
     status: { 
       type: String,

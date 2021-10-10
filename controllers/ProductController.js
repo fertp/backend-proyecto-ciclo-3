@@ -61,6 +61,18 @@ const showSlug = async (req, res, next) => {
   }
 }
 
+const category = async (req, res, next) => {
+  try {
+    const reg = await model.find({ category_id: req.params.vaca });
+    res.status(200).json(reg)
+  } catch (e) {
+    res.status(500).send({
+      message: 'Ha ocurrido un error.'
+    })
+    next(e)
+  }
+}
+
 const update = async (req, res, next) => {
   try {
     await model.findByIdAndUpdate(req.params.id, { $set: req.body })
@@ -91,6 +103,7 @@ module.exports = {
   store,
   show,
   showSlug,
+  category,
   update,
   destroy
 }

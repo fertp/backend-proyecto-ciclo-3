@@ -14,9 +14,6 @@ router.post('/store', categoryController.store)
 
 // Show (get)
 router.get("/show/:id", categoryController.show)
-
-// Show by slug (get)
-router.get("/show/slug/:slug", categoryController.showSlug)
  
 // Update (put)
 router.put('/update/:id', categoryController.update)
