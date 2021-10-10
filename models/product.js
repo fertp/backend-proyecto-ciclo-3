@@ -28,10 +28,10 @@ const productSchema = new mongoose.Schema(
       type: String,
     },
     created_at: {
-      type: Timestamp,
+      type: Date,
     },
     last_modified: {
-      type: Timestamp,
+      type: Date,
     }
   }, 
   { 
