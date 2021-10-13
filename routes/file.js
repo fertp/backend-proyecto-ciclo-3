@@ -6,32 +6,35 @@ const model = require("../models/file")
 const multer = require("multer")
 
 const storage = multer.diskStorage({
-  destination: __dirname + '/public/images/products',
-  filename: (req, file, callback) => {
-    const filename = file.originalname.toLowerCase().replaceAll(' ', '-')
-    cb(null, Date.now() + '-' + fileName)
+  destination: './public/images/products',
+  filename: (req, file, cb) => {
+    const fileName = file.originalname.toLowerCase().split(' ').join('-')
+    cb(null, fileName)
   }
 })
 
-let upload = multer({
-  storage: storage,
-  fileFilter: (req, file, callback) => {
-    if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
-      callback(null, true);
-    } else {
-      callback(null, false);
-      return callback(new Error('File type not accepted (.png, .jpg, .jpeg)'));
-    }
-  }
-})
+let upload = multer({ storage: storage })
 
+// let upload = multer({
+//   storage: storage,
+//   fileFilter: (req, file, callback) => {
+//     if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+//       callback(null, true);
+//     } else {
+//       callback(null, false);
+//       return callback(new Error('File type not accepted (.png, .jpg, .jpeg)'));
+//     }
+//   }
+// })
 
-router.post('/images/store', upload.single('image'), (req, res, next) => {
-
-  reqFile = '/public/images/products/' + req.files[0].filename
+router.post('/store', upload.single('image'), async (req, res, next) => {
 
   try {
-    const reg = model.create({ name: reqFile })
+    let name = req.file.path
+    let x = name.split("\\") 
+    x.splice(0, 1)
+    name = x.join('/')
+    const reg = await model.create({ name: name })
     res.status(201).json({
       message: 'OK',
       fileCreated: {
@@ -41,7 +44,7 @@ router.post('/images/store', upload.single('image'), (req, res, next) => {
     })
   } catch (e) {
     console.error(e)
-    res.status(500).send({
+    res.status(500).json({
       message: 'Ha ocurrido un error'
     })
     next()
@@ -59,9 +62,9 @@ router.post('/images/store', upload.single('image'), (req, res, next) => {
 // router.get("/show/:id", fileController.show)
  
 // Update (put)
-router.put('/update/:id', fileController.update)
+// router.put('/update/:id', fileController.update)
 
 // Delete 
-router.delete('/delete/:id', fileController.destroy)
+// router.delete('/delete/:id', fileController.destroy)
  
 module.exports = router; 
