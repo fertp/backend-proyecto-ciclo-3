@@ -6,7 +6,7 @@ const options = {
   useUnifiedTopology: true
 }
 
-let connection = mongoose.connect(database.db, options)
+let connection = mongoose.connect(database.url, options)
 .then(
   () => console.log("Database connected"),
   error => console.error("Database could't be connected to: " + error)

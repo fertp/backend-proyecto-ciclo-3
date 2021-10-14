@@ -5,6 +5,9 @@ const fileSchema = new mongoose.Schema(
     name: { 
       type: String, 
     }, 
+    path: { 
+      type: String, 
+    },
     created_at: {
       type: Date,
     },
