@@ -23,13 +23,13 @@ const userSchema = new Schema({
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
       "Please fill a valid email address 2",
     ],
+    lowercase: true,
   },
   password: {
     type: String,
     required: true,
     maxlength: 100,
     minlength: 6,
-    lowercase: true,
   },
   status: {
     type: Number,

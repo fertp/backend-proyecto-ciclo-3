@@ -6,10 +6,10 @@ const token = require("../services/token");
 
 // Público
 const add = async (req, res, next) => {
-  try {
+  try { console.log(req.body)
     let checkEmail = await model.findOne({ email: req.body.email });
     if (!checkEmail) {
-      //   req.body.password = await bcrypt.hash(req.body.password, 10);
+      req.body.password = await bcrypt.hash(req.body.password, 10);
       const reg = await model.create(req.body);
       res.status(200).json(reg);
     } else {
@@ -34,12 +34,11 @@ const login = async (req, res, next) => {
     });
 
     if (checkUser) {
-      //   let match = await bcrypt.compare(req.body.password, checkUser.password);
-      let match = req.body.password == checkUser.password ? true : false;
+      let match = await bcrypt.compare(req.body.password, checkUser.password);
+      // let match = req.body.password == checkUser.password ? true : false;
       if (match) {
         let tokenReturn = await token.encode(checkUser);
         res.status(200).json({ checkUser, tokenReturn });
-        // res.status(200).json({checkUser})
       } else {
         res.status(401).send({
           message: "Usuario no autorizado.",
