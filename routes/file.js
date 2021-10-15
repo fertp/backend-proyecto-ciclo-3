@@ -1,12 +1,12 @@
 const express = require("express")
 const router = express.Router()
 const fileController = require('../controllers/fileController')
-const fileUpload = require('../middlewares/fileUpload')
+const { upload } = require('../middlewares/fileUpload')
 
 // Index (Lista)
 router.get('/', fileController.index)
 
-router.post('/store', fileUpload.upload.single('image'), fileController.store)
+router.post('/store', upload.single('image'), fileController.store)
 
 // // Create (post)
 // router.post('/store', fileController.store)

@@ -1,4 +1,3 @@
-const { where } = require('../models/product');
 const model = require('../models/product');
 
 const index = async (req, res, next) => {
